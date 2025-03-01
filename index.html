@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./loader.css">
+    <!-- font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./imgs/favicon.png" type="image/x-icon">
+    <title>Forkify</title>
+</head>
+
+<body>
+    <section class="background">
+        <div class="outer-box">
+            <div class="upper-box">
+                <div class="logo"><img src="./imgs/logo.png" alt=""></div>
+                <div style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 0px;
+            ">
+
+                    <form class="searchbar">
+                        <input id="searchInput" type="search" placeholder="Search over 1,000,000 recipes...">
+                        <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> SEARCH</button>
+                    </form>
+
+                    <div class="nav-link">
+                        <ul>
+                            <li id="addRecipeBtn"><i class="fa-solid fa-pen-to-square"></i> ADD RECIPE
+                            </li>
+                            <li id="bookMarkListBtn"><i class="fa-regular fa-bookmark bk1"></i> BOOKMARKS
+                            </li>
+                        </ul>
+                        <div class="bookMarkBox active">
+                            <div class="infoMsg">
+                                <p>
+                                    <i class="fa-solid fa-triangle-exclamation"></i> No bookmarks yet. Find a nice
+                                    recipe
+                                    and bookmark it
+
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main class="main">
+                <div class="left">
+                    <div>
+                        <div class="card-list">
+
+                        </div>
+                        <div class="pgs">
+                            <button id="prevBtn"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                            <button id="nextBtn">Next <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+
+                    <div class="infoMsg">
+                        <p>
+                            <i class="fa-regular fa-face-smile"></i> Start by searching for a recipe or an ingredient.
+                            Have fun!
+
+                        </p>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+
+    <script src="./app.js"></script>
+</body>
+
+</html
