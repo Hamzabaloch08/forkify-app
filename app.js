@@ -30,7 +30,6 @@ let searchRecipes = async () => {
 let arr = []
 
 let searchSingleRecipies = async (id) => {
-
   const response = await fetch(
     `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
   );
@@ -42,8 +41,6 @@ let searchSingleRecipies = async (id) => {
 
 let displaySingleRecipe = (recipe) => {
   console.log(recipe.ingredients)
-  recipe.ingredients.forEach((element) => {
-  })
   recipeCard.innerHTML = `
   <div class="card">
   <img style="width: 80px; height:80px; border-radius: 50px";  src="${recipe.image_url}" alt="recipe image" />
