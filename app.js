@@ -1,6 +1,7 @@
 let searchValue = document.getElementById("searchInput");
 let searchBtn = document.getElementById("searchBtn");
 let recipeList = document.querySelector(".card-list");
+let recipeCard = document.querySelector(".right");
 
 let searchRecipes = async () => {
   searchValue = searchInput.value;
@@ -24,6 +25,8 @@ let searchRecipes = async () => {
   }
 };
 
+let arr = []
+
 let searchSingleRecipies = async () => {
   let card = document.querySelector(".card");
   let id = card.id;
@@ -33,11 +36,26 @@ let searchSingleRecipies = async () => {
       `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
     const JSONResponse = await response.json();
-    console.log(JSONResponse.data.recipe);
+    // console.log(JSONResponse.data.recipe, 'Recipe Data');
+    displaySingleRecipe(JSONResponse.data.recipe);
   } catch (error) {
     console.log("error: ", error);
   }
+};
 
+let displaySingleRecipe = (recipe) => {
+  console.log(recipe)
+  recipe.ingredients.forEach((element) => {
+    console.log(element,'ingredients')
+  })
+  recipeCard.innerHTML = `
+  <div class="card">
+  <img style="width: 80px; height:80px; border-radius: 50px";  src="${recipe.image_url}" alt="recipe image" />
+  <p>${recipe.title}</p>
+  <p>${recipe.cooking_time}</p>
+  <p>${recipe.servings}</p>
+  </div>
+  `;
 };
 
 searchBtn.addEventListener("click", (event) => {
@@ -45,7 +63,6 @@ searchBtn.addEventListener("click", (event) => {
   searchRecipes();
 });
 
-recipeList.addEventListener('click',()=>{
-  searchSingleRecipies()
-})
-
+recipeList.addEventListener("click", () => {
+  searchSingleRecipies();
+});
