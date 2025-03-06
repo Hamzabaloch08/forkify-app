@@ -13,40 +13,36 @@ let searchRecipes = async () => {
     recipe.forEach((element) => {
       recipeList.innerHTML += `
     
-      <div id='${element.id}' style="padding: 5px 0 0 5px" class="card">
+      <div id='${element.id}'class="card">
       <img style="width: 80px; height:80px; border-radius: 50px";  src="${element.image_url}" alt="recipe image" />
-      <p>${element.title}</p>
-      <p>${element.publisher}</p>
+        <div>
+          <p>${element.title}</p>
+          <p>${element.publisher}</p>
+        </div>
       </div>
       `;
     });
   } catch (error) {
     console.log("error: ", error);
   }
-};
+}
 
 let arr = []
 
-let searchSingleRecipies = async () => {
-  let card = document.querySelector(".card");
-  let id = card.id;
-  try {
-    console.log(id);
-    const response = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
-    const JSONResponse = await response.json();
-    // console.log(JSONResponse.data.recipe, 'Recipe Data');
-    displaySingleRecipe(JSONResponse.data.recipe);
-  } catch (error) {
-    console.log("error: ", error);
-  }
+let searchSingleRecipies = async (id) => {
+
+  const response = await fetch(
+    `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
+  );
+  const JSONResponse = await response.json();
+  console.log(JSONResponse.data.recipe);
+  displaySingleRecipe(JSONResponse.data.recipe);
 };
 
+
 let displaySingleRecipe = (recipe) => {
-  console.log(recipe)
+  console.log(recipe.ingredients)
   recipe.ingredients.forEach((element) => {
-    console.log(element,'ingredients')
   })
   recipeCard.innerHTML = `
   <div class="card">
@@ -58,11 +54,14 @@ let displaySingleRecipe = (recipe) => {
   `;
 };
 
+
 searchBtn.addEventListener("click", (event) => {
   event.preventDefault();
   searchRecipes();
 });
 
-recipeList.addEventListener("click", () => {
-  searchSingleRecipies();
-});
+recipeList.addEventListener('click', (e) => {
+  let card = e.target.closest(".card");
+  console.log(card.id); // Output: "card1"
+  searchSingleRecipies(card.id)
+})
