@@ -13,8 +13,7 @@ let searchRecipes = async () => {
       recipeList.innerHTML += `
     
       <div id='${element.id}' style="padding: 5px 0 0 5px" class="card">
-
-      <img style="width: 100px; height:100px; border-radius: 50px";  src="${element.image_url}" alt="recipe image" />
+      <img style="width: 80px; height:80px; border-radius: 50px";  src="${element.image_url}" alt="recipe image" />
       <p>${element.title}</p>
       <p>${element.publisher}</p>
       </div>
@@ -28,16 +27,25 @@ let searchRecipes = async () => {
 let searchSingleRecipies = async () => {
   let card = document.querySelector(".card");
   let id = card.id;
-  console.log(id);
-  const response = await fetch(
-    `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-  );
-  const JSONResponse = await response.json();
-  console.log(JSONResponse.data.recipe);
+  try {
+    console.log(id);
+    const response = await fetch(
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
+    );
+    const JSONResponse = await response.json();
+    console.log(JSONResponse.data.recipe);
+  } catch (error) {
+    console.log("error: ", error);
+  }
+
 };
 
 searchBtn.addEventListener("click", (event) => {
   event.preventDefault();
   searchRecipes();
 });
- 
+
+recipeList.addEventListener('click',()=>{
+  searchSingleRecipies()
+})
+
