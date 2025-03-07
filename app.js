@@ -14,7 +14,9 @@ let searchRecipes = async () => {
       recipeList.innerHTML += `
     
       <div id='${element.id}'class="card">
-      <img style="width: 80px; height:80px; border-radius: 50px";  src="${element.image_url}" alt="recipe image" />
+      <div class="card-img">
+      <img  src="${element.image_url}" alt="recipe image" />
+      </div>
         <div>
           <p>${element.title}</p>
           <p>${element.publisher}</p>
