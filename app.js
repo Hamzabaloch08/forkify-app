@@ -2,6 +2,10 @@ let searchValue = document.getElementById("searchInput");
 let searchBtn = document.getElementById("searchBtn");
 let recipeList = document.querySelector(".card-list");
 let recipeCard = document.querySelector(".right");
+let bookmarkContainer = document.querySelector(".bookMarkBox");
+let bookMarkBtn = document.getElementById("bookMarkListBtn");
+
+let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
 let searchRecipes = async () => {
   searchValue = searchInput.value;
@@ -25,9 +29,7 @@ let searchRecipes = async () => {
   } catch (error) {
     console.log("error: ", error);
   }
-}
-
-let arr = []
+};
 
 let searchSingleRecipies = async (id) => {
   const response = await fetch(
@@ -38,9 +40,8 @@ let searchSingleRecipies = async (id) => {
   displaySingleRecipe(JSONResponse.data.recipe);
 };
 
-
 let displaySingleRecipe = (recipe) => {
-  console.log(recipe.ingredients)
+  console.log(recipe.ingredients);
   recipeCard.innerHTML = `
   <div class="card">
   <img style="width: 80px; height:80px; border-radius: 50px";  src="${recipe.image_url}" alt="recipe image" />
@@ -51,14 +52,30 @@ let displaySingleRecipe = (recipe) => {
   `;
 };
 
+let toggleBookMark = (id, image_url, title) => {
+  let index = bookmarks.findIndex((recipe) => recipe.id === id);
+  if (index === -1) {
+    bookmarks.push({ id, image_url, title });
+  } else {
+    index.splice(index, 1);
+  }
+
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+  displayBookMark();
+};
+
+let displayBookMark = () => {}
+
 
 searchBtn.addEventListener("click", (event) => {
   event.preventDefault();
   searchRecipes();
 });
-
-recipeList.addEventListener('click', (e) => {
+recipeList.addEventListener("click", (e) => {
   let card = e.target.closest(".card");
   console.log(card.id); // Output: "card1"
-  searchSingleRecipies(card.id)
-})
+  searchSingleRecipies(card.id);
+});
+
+window.addEventListener("load", displayBookMark);
