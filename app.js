@@ -109,8 +109,6 @@ recipeList.addEventListener("click", (e) => {
   searchSingleRecipies(card.id);
 });
 
-
-
 // let toggleBookMark = (id, image_url, title) => {
 //   let index = bookmarks.findIndex((recipe) => recipe.id === id);
 //   if (index === -1) {
