@@ -22,7 +22,7 @@ Forkify is a fully functional recipe application that allows users to search for
 
 ```sh
 # Clone the repository
-git clone https://github.com/muhammaduzair0/forkify-clone.git
+git clone https://github.com/muhammaduzair0/forkify-app.git
 ```
 
 ## Developers
