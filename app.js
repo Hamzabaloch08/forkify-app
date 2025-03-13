@@ -3,7 +3,10 @@ let searchBtn = document.getElementById("searchBtn");
 let recipeList = document.querySelector(".card-list");
 let recipeCard = document.querySelector(".right");
 let bookmarkContainer = document.querySelector(".bookMarkBox");
-let bookMarkBtn = document.getElementById("#bookMarkListBtn");
+let bookMarkBtn = document.getElementById("bookmarkBtn");
+let recipeContainer = document.querySelector(".right");
+let bookmarkListBtn = document.getElementById("bookMarkListBtn");
+let modal = document.querySelector(".active");
 
 // let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
@@ -14,16 +17,15 @@ let searchRecipes = async () => {
     const recipeData = await fetch(url);
     const data = await recipeData.json();
     const recipe = data.data.recipes;
-    recipeList.innerHTML = ''
+    recipeList.innerHTML = "";
     recipe.forEach((element) => {
       recipe.forEach((element) => {
-
         let recipeTitle = element.title;
-        
+
         if (recipeTitle.length > 30) {
           recipeTitle = recipeTitle.slice(0, 25) + "...";
         }
-      
+
         recipeList.innerHTML += `
           <div id="${element.id}" class="card">
             <div class="card-img">
@@ -35,10 +37,8 @@ let searchRecipes = async () => {
             </div>
           </div>
         `;
-
       });
     });
-    
   } catch (error) {
     console.log("error: ", error);
   }
@@ -49,20 +49,23 @@ let searchSingleRecipies = async (id) => {
     `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
   );
   const JSONResponse = await response.json();
-  console.log(JSONResponse.data.recipe);
-  displaySingleRecipe(JSONResponse.data.recipe);
+  console.log(JSONResponse.data);
+  displaySingleRecipe(JSONResponse.data.recipe, JSONResponse.data.recipe.id);
 };
 
-let displaySingleRecipe = (recipe) => {
+let displaySingleRecipe = (recipe, id) => {
+  console.log(id);
   console.log(recipe.ingredients);
-  
+
   // Convert ingredients into list items
   let ingredientsList = recipe.ingredients
-    .map((ing) => `<li>${ing.quantity || ""} ${ing.unit} - ${ing.description}</li>`)
+    .map(
+      (ing) => `<li>${ing.quantity || ""} ${ing.unit} - ${ing.description}</li>`
+    )
     .join("");
 
   recipeCard.innerHTML = `
-  <div class="recipe-container">
+  <div id=${id}  class="recipe-container">
     <!-- Top Image -->
     <div class="recipe-img">
       <img src="${recipe.image_url}" alt="recipe image" />
@@ -73,6 +76,8 @@ let displaySingleRecipe = (recipe) => {
       <h1>${recipe.title}</h1>
       <p><strong>Cooking Time:</strong> ${recipe.cooking_time} minutes</p>
       <p><strong>Servings:</strong> ${recipe.servings}</p>
+      <Button id="bookmarkBtn">BookMark</Button>
+      
     </div>
 
     <!-- Recipe Ingredients -->
@@ -86,8 +91,12 @@ let displaySingleRecipe = (recipe) => {
     <!-- How to Cook It Section -->
     <div class="recipe-directions">
       <h3>How to Cook It</h3>
-      <p>${recipe.instructions || "Please follow the directions on the website."}</p>
-      <p>This recipe was carefully designed and tested by <strong>${recipe.publisher}</strong>. 
+      <p>${
+        recipe.instructions || "Please follow the directions on the website."
+      }</p>
+      <p>This recipe was carefully designed and tested by <strong>${
+        recipe.publisher
+      }</strong>. 
       Please check out directions at their website.</p>
       <a href=""><button>directions</button></a>
     </div>
@@ -108,6 +117,22 @@ recipeList.addEventListener("click", (e) => {
   console.log(card.id);
   searchSingleRecipies(card.id);
 });
+
+bookmarkListBtn.addEventListener("mouseover", () =>  modal.style.display = "block");
+bookmarkListBtn.addEventListener("mouseleave", () =>  modal.style.display = "none");
+
+// BOOKMARK SECTION
+
+let bookmark = (id) => {
+  bookMarkBtn.addEventListener("click", () => {
+    let bookMarkId = e.target.closest(".recipe-container");
+    if (id === bookMarkId) {
+      // Add Bookmark Container
+    } else {
+      // remove bookmark container
+    }
+  });
+};
 
 // let toggleBookMark = (id, image_url, title) => {
 //   let index = bookmarks.findIndex((recipe) => recipe.id === id);

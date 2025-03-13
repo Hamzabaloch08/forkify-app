@@ -74,23 +74,17 @@
 
 .infoMsg {
   color: #f38982;
-  width: 80%;
-  margin: auto;
+  font-size: 10px;
+}
 
-  margin-top: 40px;
-  font-size: 20px;
+.container{
+  position: relative;
 }
 
 .nav-link {
   display: flex;
   justify-content: center;
   position: relative;
-}
-
-#bookMarkListBtn:hover{
-  background: #000;
-  height: 100px;
-  width: 100px;
 }
 
 
@@ -397,6 +391,30 @@
   display: none;
 }
 
+.bookMarkBox {
+  background-color: white;
+  height: 50px;
+  padding: 10px;
+  position: absolute;
+  top: 65%;
+}
+
+
+#bookmarkContainer{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.search-title{
+    color: #f38982;
+    font-size: 20px;
+    text-align: center;
+  
+}
 
 
 
