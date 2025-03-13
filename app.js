@@ -126,10 +126,10 @@ bookmarkListBtn.addEventListener("mouseleave", () =>  modal.style.display = "non
 let bookmark = (id) => {
   bookMarkBtn.addEventListener("click", () => {
     let bookMarkId = e.target.closest(".recipe-container");
-    if (id === bookMarkId) {
-      // Add Bookmark Container
+    if (id === bookMarkId.id) {
+      // remove Bookmark Container
     } else {
-      // remove bookmark container
+      // add bookmark container
     }
   });
 };
